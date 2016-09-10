@@ -1,0 +1,6 @@
+hello stream world
+enter a number>3 squares is 9
+enter a number>5 squares is 25
+enter a number>3 squares is 9
+enter a number>5 squares is 25
+enter a number>bye....bye

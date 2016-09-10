@@ -1,0 +1,19 @@
+sue
+pay=>44000.0
+job=>'hdw'
+name=>'sue jones'
+age=>45
+endrec
+tom
+pay=>0
+job=>None
+name=>'tom tom'
+age=>50
+endrec
+bob
+pay=>30000
+job=>'dev'
+name=>'bob smith'
+age=>42
+endrec
+enddb

@@ -1,0 +1,33 @@
+This module provides access to some objects used or maintained by the
+interpreter and to functions that interact strongly with the interpreter.
+
+Dynamic objects:
+
+argv -- command line arguments; argv[0] is the script pathname if known
+path -- module search path; path[0] is the script directory, else ''
+modules -- dictionary of loaded modules
+
+displayhook -- called to show results in an interactive session
+More?y
+excepthook -- called to handle any uncaught exception other than SystemExit
+  To customize printing in an interactive session or to install a custom
+  top-level exception handler, assign other functions to replace these.
+
+stdin -- standard input file object; used by input()
+stdout -- standard output file object; used by print()
+stderr -- standard error object; used for error messages
+  By assigning other file objects (or objects that behave like files)
+  to these, it is possible to redirect all of the interpreter's I/O.
+
+More?y
+last_type -- type of last uncaught exception
+last_value -- value of last uncaught exception
+last_traceback -- traceback of last uncaught exception
+  These three are only available in an interactive session after a
+  traceback has been printed.
+
+Static objects:
+
+builtin_module_names -- tuple of module names built into this interpreter
+copyright -- copyright notice pertaining to this interpreter
+More?
