@@ -49,7 +49,7 @@ def get_driver_name():
 
 # 遍历文件目录，返回查找到的文件列表
 def walk_file(dirs,file_type=None):
-    visited={}
+    # visited={}
     target=[]
     for (this_dir,current_dir_dirs,file_here) in os.walk(dirs):
         # print(current_dir_dirs)
