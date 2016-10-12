@@ -776,24 +776,41 @@
 # loop.close()
 
 
-def produce(c):
-    c.send(None)
-    n=0
-    while n<5:
-        n=n+1
-        print('producing %s' % n)
-        r=c.send(n)
-        print('consumer return:%s' % r)
-    c.close()
+# def produce(c):
+#     c.send(None)
+#     n=0
+#     while n<5:
+#         n=n+1
+#         print('producing %s' % n)
+#         r=c.send(n)
+#         print('consumer return:%s' % r)
+#     c.close()
+#
+# def consumer():
+#     r=''
+#     while True:
+#         n=yield  r
+#         if not n:
+#             return
+#         print('consuming: %s' % n)
+#         r='200ok'
+#
+# c=consumer()
+# produce(c)
 
-def consumer():
-    r=''
-    while True:
-        n=yield  r
-        if not n:
-            return
-        print('consuming: %s' % n)
-        r='200ok'
+import asyncio
 
-c=consumer()
-produce(c)
+# Borrowed from http://curio.readthedocs.org/en/latest/tutorial.html.
+@asyncio.coroutine
+def countdown(number, n):
+    while n > 0:
+        print('T-minus', n, '({})'.format(number))
+        yield from asyncio.sleep(1)
+        n -= 1
+
+loop = asyncio.get_event_loop()
+tasks = [
+    asyncio.ensure_future(countdown("A", 2)),
+    asyncio.ensure_future(countdown("B", 3))]
+loop.run_until_complete(asyncio.wait(tasks))
+loop.close()
