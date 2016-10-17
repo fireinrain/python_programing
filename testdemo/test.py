@@ -797,20 +797,39 @@
 #
 # c=consumer()
 # produce(c)
+#
+# import asyncio
+#
+# # Borrowed from http://curio.readthedocs.org/en/latest/tutorial.html.
+# @asyncio.coroutine
+# def countdown(number, n):
+#     while n > 0:
+#         print('T-minus', n, '({})'.format(number))
+#         yield from asyncio.sleep(1)
+#         n -= 1
+#
+# loop = asyncio.get_event_loop()
+# tasks = [
+#     asyncio.ensure_future(countdown("A", 2)),
+#     asyncio.ensure_future(countdown("B", 3))]
+# loop.run_until_complete(asyncio.wait(tasks))
+# loop.close()
 
-import asyncio
 
-# Borrowed from http://curio.readthedocs.org/en/latest/tutorial.html.
-@asyncio.coroutine
-def countdown(number, n):
-    while n > 0:
-        print('T-minus', n, '({})'.format(number))
-        yield from asyncio.sleep(1)
-        n -= 1
+# tornado框架尝试
+import tornado.ioloop
+import tornado.web
 
-loop = asyncio.get_event_loop()
-tasks = [
-    asyncio.ensure_future(countdown("A", 2)),
-    asyncio.ensure_future(countdown("B", 3))]
-loop.run_until_complete(asyncio.wait(tasks))
-loop.close()
+class MainHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.write("Hello, world")
+
+def make_app():
+    return tornado.web.Application([
+        (r"/", MainHandler),
+    ])
+
+if __name__ == "__main__":
+    app = make_app()
+    app.listen(8888)
+    tornado.ioloop.IOLoop.current().start()
