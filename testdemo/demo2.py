@@ -453,5 +453,3 @@ from bs4 import BeautifulSoup
 #     os.makedirs(PWD)
 #
 # requestUrl(urlNext + str(page_count))
-
-
