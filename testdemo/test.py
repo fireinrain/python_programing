@@ -839,3 +839,56 @@
 # string="你好"
 # ss=urllib.parse.quote(string)
 # print(ss)
+# import time
+# 导入所需的模块
+from bs4 import BeautifulSoup
+import re
+
+# 一段html的字符串
+html_doc = """
+<html>
+    <head>
+        <title>The Dormouse's story </title>
+    </head>
+<body>
+<p class="story">Once upon a time where three little sisters; and their names were>
+<a href="http://example.com/elsie" class="sister" id="link1">Elsie</a>
+<a href="http//example.com/lacie" class="sister" id="link2">Lacie</a> and
+<a href="http://example.com/tillie" class="sister" id="link3">Tillie</a>;
+and they lived at the bottom of a well.</p>
+
+<p class="stroy">...</p>
+
+"""
+
+# 创建beautifulSopu对象
+soup = BeautifulSoup(html_doc, 'html.parser')
+
+# 查找html中出现的所有链接
+print("获取所有链接：")
+
+links = soup.find_all('a')
+for link in links:
+    print(link.name, link['href'], link.get_text())
+
+
+# 查找html文件中lacie的链接
+print
+'获取lacie的链接'
+link_node = soup.find('a', href="http://example.com/lacie")
+http//example.com/lacie
+print(link_node.name, link_node.get_text())
+
+
+# 利用正则表达式进行模糊匹配
+print('正则模糊匹配:')
+
+link_node = soup.find_all('a', href=re.compile(r"ill"))
+print(link_node.name, link_node['href'], link_node.get_text())
+
+
+# 获取标题的文字
+print('获取p段落文字')
+link_node = soup.find('p', class__='title')
+
+print(link_node.name, link_node['href'], link_node.get_text())
