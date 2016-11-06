@@ -839,3 +839,141 @@
 # string="你好"
 # ss=urllib.parse.quote(string)
 # print(ss)
+# import time
+# 导入所需的模块
+# from bs4 import BeautifulSoup
+# import re
+#
+# # 一段html的字符串
+# html_doc = """
+# <html>
+#     <head>
+#         <title>The Dormouse's story </title>
+#     </head>
+# <body>
+# <p class="story">Once upon a time where three little sisters; and their names were>
+# <a href="http://example.com/elsie" class="sister" id="link1">Elsie</a>
+# <a href="http//example.com/lacie" class="sister" id="link2">Lacie</a> and
+# <a href="http://example.com/tillie" class="sister" id="link3">Tillie</a>;
+# and they lived at the bottom of a well.</p>
+#
+# <p class="stroy">...</p>
+#
+# """
+#
+# # 创建beautifulSopu对象
+# soup = BeautifulSoup(html_doc, 'html.parser')
+#
+# # 查找html中出现的所有链接
+# print("获取所有链接：")
+#
+# links = soup.find_all('a')
+# for link in links:
+#     print(link.name, link['href'], link.get_text())
+#
+#
+# # 查找html文件中lacie的链接
+# print
+# '获取lacie的链接'
+# link_node = soup.find('a', href="http://example.com/lacie")
+# http//example.com/lacie
+# print(link_node.name, link_node.get_text())
+#
+#
+# # 利用正则表达式进行模糊匹配
+# print('正则模糊匹配:')
+#
+# link_node = soup.find_all('a', href=re.compile(r"ill"))
+# print(link_node.name, link_node['href'], link_node.get_text())
+#
+#
+# # 获取标题的文字
+# print('获取p段落文字')
+# link_node = soup.find('p', class__='title')
+#
+# print(link_node.name, link_node['href'], link_node.get_text())
+
+# import string,os
+# strings=string.printable
+# blist=[1,52,8,7]
+# the_byte=bytes("hello".encode())
+# print(the_byte)
+# blist1='[1,52,8,7]'
+# print([blist1.encode()[i] for i in range(len(blist1.encode()))])
+# print(the_byte)
+# print(len(strings))
+# poem="heoooejloooascs sadsa sdas"
+# file=open('xxx.txt','r')
+# file.seek(15)
+
+# new_file=file.readlines()
+# print(file.tell())
+
+# file.close()
+# print(new_file)
+
+# import csv
+# validate=[["name","xiaoqian"],["age",12],["height",123]]
+# with open('validate','w') as file:
+# 	csvout=csv.writer(file)
+# 	csvout.writerows(validate)
+# with open('validate','r') as files:
+# 	csvout=csv.reader(files)
+# 	[print(i) for i in csvout if i]
+# 	# for i in csvout:
+# 	# 	print(i)
+
+# rrr=csv.reader(file('validate','r'))
+# for i in rrr:
+# 	print(i)
+
+# import ElementTree
+
+# letters=['I','L','o','v','e','y','o','u']
+# [print(i.join(letters)) for i in letters]
+# print(if(False=True):return "yes")
+
+# import pickle
+# strings="i love xiaoqian"
+# pickled=pickle.dumps(strings)
+# print(pickled)
+# pickle_to_str=pickle.loads(pickled)
+# print(pickle_to_str)
+#
+# data=dict(name='xiaoqian',age=12)
+# tall=data.get('xiaoqian',132)
+# print(tall)
+# print(data)
+
+
+from flask import Flask, request, session, redirect, url_for
+
+app = Flask(__name__)
+app.secret_key = "A0Zr98j/3yX R~XHH!jmN]LWX/,?RT"
+
+
+@app.route('/')
+def v_inbox():
+    if 'username' in session:
+        return "<h1>%s\mailbox</h1>" % session['username']
+    else:
+        return 'not authorized go to login<a href="%s">here</a> to authorize yourself' % url_for('v_auth')
+
+
+@app.route('/login', methods=['POST', 'GET'])
+def v_auth():
+    if request.method == "GET":
+        return '''
+                <form action="%s" method="POST">
+                    <input type="text" name="username" placeholder="input your username">
+                    <input type="password" name="password" placeholder="input your password">
+                    <input type="submit" value="submit">
+                </form>
+                ''' % url_for('v_auth')
+
+
+    if request.method == "POST":
+        session['username'] = request.form['username']
+        return 'authorized! go to inbox<a href="%s">here</a> to check mail' % url_for('v_inbox')
+
+app.run(host='0.0.0.0', port=8000)
