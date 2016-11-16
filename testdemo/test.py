@@ -946,34 +946,48 @@
 # print(data)
 
 
-from flask import Flask, request, session, redirect, url_for
+# from flask import Flask, request, session, redirect, url_for
+#
+# app = Flask(__name__)
+# app.secret_key = "A0Zr98j/3yX R~XHH!jmN]LWX/,?RT"
+#
+#
+# @app.route('/')
+# def v_inbox():
+#     if 'username' in session:
+#         return "<h1>%s\mailbox</h1>" % session['username']
+#     else:
+#         return 'not authorized go to login<a href="%s">here</a> to authorize yourself' % url_for('v_auth')
+#
+#
+# @app.route('/login', methods=['POST', 'GET'])
+# def v_auth():
+#     if request.method == "GET":
+#         return '''
+#                 <form action="%s" method="POST">
+#                     <input type="text" name="username" placeholder="input your username">
+#                     <input type="password" name="password" placeholder="input your password">
+#                     <input type="submit" value="submit">
+#                 </form>
+#                 ''' % url_for('v_auth')
+#
+#
+#     if request.method == "POST":
+#         session['username'] = request.form['username']
+#         return 'authorized! go to inbox<a href="%s">here</a> to check mail' % url_for('v_inbox')
+#
+# app.run(host='0.0.0.0', port=8000)
 
-app = Flask(__name__)
-app.secret_key = "A0Zr98j/3yX R~XHH!jmN]LWX/,?RT"
 
+from wsgiref.simple_server import make_server
 
-@app.route('/')
-def v_inbox():
-    if 'username' in session:
-        return "<h1>%s\mailbox</h1>" % session['username']
-    else:
-        return 'not authorized go to login<a href="%s">here</a> to authorize yourself' % url_for('v_auth')
+class WSGI_APP:
+    def __call__(self,environ,start_response):
+        start_response('200 OK',[('Context-Type','text/plain')])
+        return 'such a tiny wsgi app!'
 
+app = WSGI_APP()
+httpd = make_server('0.0.0.0',8000,app)
+print('start server')
+httpd.serve_forever()
 
-@app.route('/login', methods=['POST', 'GET'])
-def v_auth():
-    if request.method == "GET":
-        return '''
-                <form action="%s" method="POST">
-                    <input type="text" name="username" placeholder="input your username">
-                    <input type="password" name="password" placeholder="input your password">
-                    <input type="submit" value="submit">
-                </form>
-                ''' % url_for('v_auth')
-
-
-    if request.method == "POST":
-        session['username'] = request.form['username']
-        return 'authorized! go to inbox<a href="%s">here</a> to check mail' % url_for('v_inbox')
-
-app.run(host='0.0.0.0', port=8000)
