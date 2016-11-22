@@ -1452,58 +1452,58 @@ app.run('0.0.0.0', port=8000, debug=True)
 
 # app.run(host='0.0.0.0',port=8000,debug=True)
 
-
-repo = {}
-
-
-class User:
-    def __init__(self, id, name, age):
-        self.id = id
-        self.name = name
-        self.age = age
-
-    def save(self):
-        print("save user %d to database" % self.id)
-        repo[self.id] = self
-
-    @staticmethod
-    def load(**kwargs):
-        id = kwargs.pop('id')
-        print(id)
-        print(" load from database by id %d" % id)
-        return repo[id]
-
-    def __str__(self):
-        return """
-                id:%d
-                name:%s
-                age:%d
-
-
-            """ % (self.id, self.name, self.age)
-
-
-user1 = User(1, 'liuzhaoyang', 13)
-user2 = User(2, 'xiaoqian', 15)
-user3 = User(3, 'liuda', 13)
-user1.save()
-user2.save()
-user3.save()
-# for i,a in repo.items():
-#     print(i,a)
-user = User.load(id=1, name='liuzhaoyang')
-print(user)
-################################################################################
-
-from flask import Blueprint
-
-admin=Blueprint("admin",__name__)
-
-@admin.route('/')
-def admin_index():
-	return "welcome to my blueprint"
-
-vip=Blueprint('vip',__name__)
-@vip.route('/')
-def vip_index():
-	return "this is a vip page"
+#
+# repo = {}
+#
+#
+# class User:
+#     def __init__(self, id, name, age):
+#         self.id = id
+#         self.name = name
+#         self.age = age
+#
+#     def save(self):
+#         print("save user %d to database" % self.id)
+#         repo[self.id] = self
+#
+#     @staticmethod
+#     def load(**kwargs):
+#         id = kwargs.pop('id')
+#         print(id)
+#         print(" load from database by id %d" % id)
+#         return repo[id]
+#
+#     def __str__(self):
+#         return """
+#                 id:%d
+#                 name:%s
+#                 age:%d
+#
+#
+#             """ % (self.id, self.name, self.age)
+#
+#
+# user1 = User(1, 'liuzhaoyang', 13)
+# user2 = User(2, 'xiaoqian', 15)
+# user3 = User(3, 'liuda', 13)
+# user1.save()
+# user2.save()
+# user3.save()
+# # for i,a in repo.items():
+# #     print(i,a)
+# user = User.load(id=1, name='liuzhaoyang')
+# print(user)
+# ################################################################################
+#
+# from flask import Blueprint
+#
+# admin=Blueprint("admin",__name__)
+#
+# @admin.route('/')
+# def admin_index():
+# 	return "welcome to my blueprint"
+#
+# vip=Blueprint('vip',__name__)
+# @vip.route('/')
+# def vip_index():
+# 	return "this is a vip page"
