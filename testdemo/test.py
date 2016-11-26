@@ -994,124 +994,124 @@
 
 # -*- coding:utf-8 -*-
 # !usr/bin/python
-from flask import Flask, request, redirect, url_for, make_response, abort, session
-import os
-import time
-import json as js
-
-app = Flask(__name__, static_folder="statics", static_url_path='/statics')
-
-
-@app.route('/')
-def index():
-    # return "Hello flask"
-    return redirect(url_for("whocare", name="xiaoqiana"))
-
-
-@app.route('/test')
-def test():
-    # return "this is a test!"
-    container = []
-    all_func = str(dir(app))
-    # for fun in all_func:
-    # 	detail=dir(fun)
-    # 	container.append(detail)
-    # print([i for i in all_func])
-    return all_func
-
-
-# 尝试不使用app.route装饰器
-def add_url_route():
-    """add the url to a function"""
-    return "we add the url to a function without app.route"
-
-
-app.add_url_rule('/addurl', view_func=add_url_route)
-
-
-# 返回好友
-@app.route('/friend')
-def friend():
-    return "<h1>My friend xiao qian!</h1>"
-
-
-# 只支持post访问
-@app.route('/auth', methods=['POST'])
-def validate_auth():
-    pass
-
-
-# 同时支持post和get访问
-@app.route('/user', methods=['POST', 'GET'])
-def is_user():
-    if request.method == 'POST':
-        return "this is a post request"
-    if request.method == 'GET':
-        return "this is a get post"
-    else:
-        return "bad request"
-
-
-# 动态路由
-@app.route('/users/<user>')
-def who_is(user):
-    if not user:
-        return redirect(index)
-    else:
-        return "%s wellcome to the site" % user
-
-
-# 多个参数
-@app.route('/users/<user>/friend/<friend>')
-def whose_friend(user, friend):
-    return "%s has friend %s" % (user, friend)
-
-
-# 文件访问，返回数据
-@app.route('/file/<fname>')
-def fatch_file(fname):
-    full_name = os.path.join('./', fname)
-
-    with open(full_name, 'r', encoding='utf8') as file_string:
-        # ss=''
-        # for i in file_string:
-        # 	ss_str=i+'\n'
-        # 	ss+=ss_str
-
-        ss = ''
-        long_str = ss.join(file_string.read())
-    # print(long_str)
-    # f_str=file_string.read()
-    return long_str
+# from flask import Flask, request, redirect, url_for, make_response, abort, session
+# import os
+# import time
+# import json as js
+#
+# app = Flask(__name__, static_folder="statics", static_url_path='/statics')
+#
+#
+# @app.route('/')
+# def index():
+#     # return "Hello flask"
+#     return redirect(url_for("whocare", name="xiaoqiana"))
+#
+#
+# @app.route('/test')
+# def test():
+#     # return "this is a test!"
+#     container = []
+#     all_func = str(dir(app))
+#     # for fun in all_func:
+#     # 	detail=dir(fun)
+#     # 	container.append(detail)
+#     # print([i for i in all_func])
+#     return all_func
+#
+#
+# # 尝试不使用app.route装饰器
+# def add_url_route():
+#     """add the url to a function"""
+#     return "we add the url to a function without app.route"
+#
+#
+# app.add_url_rule('/addurl', view_func=add_url_route)
+#
+#
+# # 返回好友
+# @app.route('/friend')
+# def friend():
+#     return "<h1>My friend xiao qian!</h1>"
+#
+#
+# # 只支持post访问
+# @app.route('/auth', methods=['POST'])
+# def validate_auth():
+#     pass
+#
+#
+# # 同时支持post和get访问
+# @app.route('/user', methods=['POST', 'GET'])
+# def is_user():
+#     if request.method == 'POST':
+#         return "this is a post request"
+#     if request.method == 'GET':
+#         return "this is a get post"
+#     else:
+#         return "bad request"
+#
+#
+# # 动态路由
+# @app.route('/users/<user>')
+# def who_is(user):
+#     if not user:
+#         return redirect(index)
+#     else:
+#         return "%s wellcome to the site" % user
+#
+#
+# # 多个参数
+# @app.route('/users/<user>/friend/<friend>')
+# def whose_friend(user, friend):
+#     return "%s has friend %s" % (user, friend)
+#
+#
+# # 文件访问，返回数据
+# @app.route('/file/<fname>')
+# def fatch_file(fname):
+#     full_name = os.path.join('./', fname)
+#
+#     with open(full_name, 'r', encoding='utf8') as file_string:
+#         # ss=''
+#         # for i in file_string:
+#         # 	ss_str=i+'\n'
+#         # 	ss+=ss_str
+#
+#         ss = ''
+#         long_str = ss.join(file_string.read())
+#     # print(long_str)
+#     # f_str=file_string.read()
+#     return long_str
 
 
 # url变量过滤测试
-@app.route('/number/<int:nub>')
-def is_num(nub):
-    if type(nub) == int:
-        return "the url filter is worked!"
-    else:
-        return "not worked!"
-
-
-# url数字相加
-@app.route('/<ways>/<int:num1>/<int:num2>')
-def calculate_num(ways, num1, num2):
-    ways_dic = dict(add='+', sub='-', mul='*', div='/')
-    operate = ways_dic.get(ways, "nothing")
-    # print(eval(str(num1)+operate+str(num2)))
-    result = eval(str(num1) + operate + str(num2))
-    return "%s%s%s=%d" % (num1, operate, num2, result)
+# @app.route('/number/<int:nub>')
+# def is_num(nub):
+#     if type(nub) == int:
+#         return "the url filter is worked!"
+#     else:
+#         return "not worked!"
+#
+#
+# # url数字相加
+# @app.route('/<ways>/<int:num1>/<int:num2>')
+# def calculate_num(ways, num1, num2):
+#     ways_dic = dict(add='+', sub='-', mul='*', div='/')
+#     operate = ways_dic.get(ways, "nothing")
+#     # print(eval(str(num1)+operate+str(num2)))
+#     result = eval(str(num1) + operate + str(num2))
+#     return "%s%s%s=%d" % (num1, operate, num2, result)
 
 
 # python 没有swith/case用法
 
 
 # 访问点endpoint
-# @app.route('/home',endpoint='wwww')
-@app.route('/home/<name>', endpoint="whocare")
-def home(name):
-    return "str(url_map,view_functions)%s" % name
+# # @app.route('/home',endpoint='wwww')
+# @app.route('/home/<name>', endpoint="whocare")
+# def home(name):
+#     return "str(url_map,view_functions)%s" % name
 
 
 # print(app.url_map)
@@ -1140,24 +1140,24 @@ def home(name):
 # 	return "this is contact"
 
 # 添加锚点
-@app.route('/url')
-def url_to():
-    # print(url_for('v_contacts',whoami="xiao",format='json',name='xiaoqian',
-    # _external=True,_anchor='part2'
-    # ))
-    return "see console output"
-
-
-@app.route('/contact/<whoami>')
-def v_contacts():
-    return "this is contact"
-
-
-# request对象(request 的headers和cookies)
-@app.route('/request')
-def request_s():
-    print(type(request.headers))
-    return str(request.cookies)
+# @app.route('/url')
+# def url_to():
+#     # print(url_for('v_contacts',whoami="xiao",format='json',name='xiaoqian',
+#     # _external=True,_anchor='part2'
+#     # ))
+#     return "see console output"
+#
+#
+# @app.route('/contact/<whoami>')
+# def v_contacts():
+#     return "this is contact"
+#
+#
+# # request对象(request 的headers和cookies)
+# @app.route('/request')
+# def request_s():
+#     print(type(request.headers))
+#     return str(request.cookies)
 
 
 # 读取表单
@@ -1183,127 +1183,127 @@ def request_s():
 # 		return "你是管理员"
 # 	else:
 # 		return "你不是管理员"
-
-
-@app.route('/form')
-def get_form():
-    return """
-	<form action="/search" method="GET">
-            <input type="text" name="q" placeholder="input your user id">
-
-            <input type="submit" value="Login">
-        </form>
-
-
-	"""
-
-
-# 读取查询参数
-@app.route('/search')
-def v_search():
-    q = request.args['q']
-    return "you are searching %s" % q
-
-
-@app.route('/json')
-def json():
-    print(request.json)  # 字典或是数组
-    return "see the result in the console"
-
-
-# 自定义响应
-@app.route('/xxx')
-def v_index():
-    return '<a href="%s">ping</a>' % url_for('v_ping')
-
-
-@app.route('/ping')
-def v_ping():
-    res = make_response("xiaoqian i love you d you know!")
-    res.mimetype = "text/plain"
-    res.headers['x-tag'] = "sth.magic"
-    return res
-
-
-# 设置cookies
-@app.route('/cookie/<user>')
-def create_cookie(user):
-    res = make_response('go <a href="%s">page2</a>' % '/page2')
-    c_time = time.ctime()
-    res.set_cookie('user', user)
-    res.set_cookie('lastvisit', str(c_time))
-    return res
-
-
-@app.route('/page2')
-def page():
-    user = request.cookies['user']
-    lastvisit = request.cookies['lastvisit']
-    if user:
-        return "you are {},the last time you visit is{}".format(user, lastvisit)
-    else:
-        return "unknown user"
-
-
-# 返回json数据
-@app.route('/calljson')
-def back_json():
-    users = ['lida', 'lili', 'xiaoqian']
-    # print(json.dumps(users))
-    return js.dumps(users), 200, [('Content-Type', 'application/json;charset=utf-8')]
-
-
-@app.route('/admin')
-def admin():
-    if 'token' in request.args:
-        return "you are a good boy"
-    else:
-        abort(401)
-
-
-# session控制上下文
-# @app.route('/session')
-# def ss():
-
-# 	if not ssession['user']:
-# 		return redirect('/login')
-# 	else:
-# 		return "you have session"
-
-app.run(host='0.0.0.0', port=8000, debug=True)
-
-######################################################################################################
-
-# -*-coding:utf-8 -*-
-
-
-import os
-from flask import Flask, Blueprint
-from flask_sqlalchemy import SQLAlchemy
-
-basedir = os.path.abspath(os.path.dirname(__file__))
-
-app = Flask(__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
-app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
-
-db = SQLAlchemy(app)
-
-
-class User(db.Model):
-    __tablename__ = 'ezuser'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64), unique=True, index=True)
-    age = db.Column(db.Integer)
-    Tel = db.Column(db.String(20))
-
-    def __str__(self):
-        return '''
-            id : %d
-            name : %s
-            age : %d
-        ''' % (self.id, self.name, self.age)
+#
+#
+# @app.route('/form')
+# def get_form():
+#     return """
+# 	<form action="/search" method="GET">
+#             <input type="text" name="q" placeholder="input your user id">
+#
+#             <input type="submit" value="Login">
+#         </form>
+#
+#
+# 	"""
+#
+#
+# # 读取查询参数
+# @app.route('/search')
+# def v_search():
+#     q = request.args['q']
+#     return "you are searching %s" % q
+#
+#
+# @app.route('/json')
+# def json():
+#     print(request.json)  # 字典或是数组
+#     return "see the result in the console"
+#
+#
+# # 自定义响应
+# @app.route('/xxx')
+# def v_index():
+#     return '<a href="%s">ping</a>' % url_for('v_ping')
+#
+#
+# @app.route('/ping')
+# def v_ping():
+#     res = make_response("xiaoqian i love you d you know!")
+#     res.mimetype = "text/plain"
+#     res.headers['x-tag'] = "sth.magic"
+#     return res
+#
+#
+# # 设置cookies
+# @app.route('/cookie/<user>')
+# def create_cookie(user):
+#     res = make_response('go <a href="%s">page2</a>' % '/page2')
+#     c_time = time.ctime()
+#     res.set_cookie('user', user)
+#     res.set_cookie('lastvisit', str(c_time))
+#     return res
+#
+#
+# @app.route('/page2')
+# def page():
+#     user = request.cookies['user']
+#     lastvisit = request.cookies['lastvisit']
+#     if user:
+#         return "you are {},the last time you visit is{}".format(user, lastvisit)
+#     else:
+#         return "unknown user"
+#
+#
+# # 返回json数据
+# @app.route('/calljson')
+# def back_json():
+#     users = ['lida', 'lili', 'xiaoqian']
+#     # print(json.dumps(users))
+#     return js.dumps(users), 200, [('Content-Type', 'application/json;charset=utf-8')]
+#
+#
+# @app.route('/admin')
+# def admin():
+#     if 'token' in request.args:
+#         return "you are a good boy"
+#     else:
+#         abort(401)
+#
+#
+# # session控制上下文
+# # @app.route('/session')
+# # def ss():
+#
+# # 	if not ssession['user']:
+# # 		return redirect('/login')
+# # 	else:
+# # 		return "you have session"
+#
+# app.run(host='0.0.0.0', port=8000, debug=True)
+#
+# ######################################################################################################
+#
+# # -*-coding:utf-8 -*-
+#
+#
+# import os
+# from flask import Flask, Blueprint
+# from flask_sqlalchemy import SQLAlchemy
+#
+# basedir = os.path.abspath(os.path.dirname(__file__))
+#
+# app = Flask(__name__)
+#
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+# app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+#
+# db = SQLAlchemy(app)
+#
+#
+# class User(db.Model):
+#     __tablename__ = 'ezuser'
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String(64), unique=True, index=True)
+#     age = db.Column(db.Integer)
+#     Tel = db.Column(db.String(20))
+#
+#     def __str__(self):
+#         return '''
+#             id : %d
+#             name : %s
+#             age : %d
+#         ''' % (self.id, self.name, self.age)
 
 
 # class Logger(db.Model):
@@ -1350,23 +1350,23 @@ class User(db.Model):
 
 # 创建蓝图
 
-@app.route('/')
-def index():
-    # datas=User.query.all()
-
-    # for i in datas:
-    # 	a=print(i)
-    # 	type(a)
-    return "type(datas)"
-
-
-# 后台蓝图注册
-from admin_bp import admin, vip
-
-app.register_blueprint(admin, url_prefix="/admin")
-app.register_blueprint(vip, url_prefix="/vip")
-
-app.run('0.0.0.0', port=8000, debug=True)
+# @app.route('/')
+# def index():
+#     # datas=User.query.all()
+#
+#     # for i in datas:
+#     # 	a=print(i)
+#     # 	type(a)
+#     return "type(datas)"
+#
+#
+# # 后台蓝图注册
+# from admin_bp import admin, vip
+#
+# app.register_blueprint(admin, url_prefix="/admin")
+# app.register_blueprint(vip, url_prefix="/vip")
+#
+# app.run('0.0.0.0', port=8000, debug=True)
 #########################################################################################
 # from flask import Flask, request, session, redirect, url_for
 
@@ -1507,3 +1507,123 @@ app.run('0.0.0.0', port=8000, debug=True)
 # @vip.route('/')
 # def vip_index():
 # 	return "this is a vip page"
+# a  = [1,2,5,8,9]
+# b=iter(a)
+# c=iter(b)
+# print(id(b),id(c))
+
+# def plus(args):
+#     for i in args:
+#         yield i*2
+#
+#
+# def count(*args):
+#     for i in args:
+#         yield i+1
+# i=count(1,2,3,4,5,6,7)
+# num=plus(i)
+#
+#
+#
+# for i in num:
+#     print(i)
+#! /usr/bin/python3
+# _encoding:utf-8_
+# Written by liuzhaoyang
+# wcontact:liu575563079@gmail.com
+
+
+# def counsumer():
+#     r=''
+#     while True:
+#         n=yield r
+#         if not n:
+#             return
+#         print('cusumeing')
+#         r='200ok'
+#
+# def product(c):
+#     c.send(None)
+#     n=0
+#     while n<5:
+#         n=n+1
+#         print('producting')
+#         r=c.send(n)
+#         print('consumer return')
+#     c.close()
+# c=counsumer()
+# print(type(c))
+# product(c)
+
+# file=open('data.txt','r')
+# print((file.__next__(),file.__next__(),file.__next__()))
+
+#
+# dit=dict(a=10,b=30,c=52,d=100)
+# key=iter(dit)
+# for i in key:
+#     print(i)
+
+# import os
+# p=os.popen('dir')
+# print(p.__next__())
+
+# alpha=['a','b','c']
+# a=map(lambda x:x.upper(),alpha)
+# print(list(a))
+
+# import asyncio
+# @asyncio.coroutine
+# def hello():
+#     print('hello')
+#     yield from hi()
+#     print('hello again')
+#
+#
+# @asyncio.coroutine
+# def hi():
+#     print('hi')
+#     yield from hello()
+# loop=asyncio.get_event_loop()
+# task=[hello(),hi()]
+#
+# loop.run_until_complete(asyncio.wait(task))
+# loop.close()
+#
+
+# import asyncio
+#
+# async def compute(x, y):
+#     print("Compute %s + %s ..." % (x, y))
+#     await asyncio.sleep(10.0)
+#     return x + y
+#
+# async def print_sum(x, y):
+#     result = await compute(x, y)
+#     print("%s + %s = %s" % (x, y, result))
+#
+# loop = asyncio.get_event_loop()
+# tasks = [print_sum(1,2),print_sum(3,4)]
+# loop.run_until_complete(asyncio.wait(tasks))
+# loop.close()
+# a = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+# print(list(reversed(a)))
+
+# lint='adhasdha{}{}{}{}'.format(1,2,3,4)
+# print(lint)
+#
+
+import aiohttp
+import asyncio
+
+@asyncio.coroutine
+def print_page(url):
+    response=yield from aiohttp.request('GET',url)
+    body=yield from response.read_and_close(decode=True)
+    print(body)
+
+loop=asyncio.get_event_loop()
+loop.run_until_complete(print_page('http://www.baidu.com'))
+
+
+
