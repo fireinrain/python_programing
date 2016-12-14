@@ -1625,17 +1625,46 @@
 # loop=asyncio.get_event_loop()
 # loop.run_until_complete(print_page('http://www.baidu.com'))
 
-import argparse
+# import argparse
+#
+# parser = argparse.ArgumentParser(description='Process some integers.')
+# parser.add_argument('integers', metavar='N', type=int, nargs='+',
+#                    help='an integer for the accumulator')
+# parser.add_argument('--sum', dest='accumulate', action='store_const',
+#                    const=sum, default=max,
+#                    help='sum the integers (default: find the max)')
+#
+# args = parser.parse_args()
+# print(args.accumulate(args.integers))
+import time
 
-parser = argparse.ArgumentParser(description='Process some integers.')
-parser.add_argument('integers', metavar='N', type=int, nargs='+',
-                   help='an integer for the accumulator')
-parser.add_argument('--sum', dest='accumulate', action='store_const',
-                   const=sum, default=max,
-                   help='sum the integers (default: find the max)')
+def total_time(func):
+    def time_it():
+        start_time = time.time()
+        func()
+        end_time = time.time()
+        print('耗时{}'.format(end_time-start_time))
+    return time_it
 
-args = parser.parse_args()
-print(args.accumulate(args.integers))
+@total_time
+def list_time():
+    count = 10**6
+    nums = []
+    for i in range(count):
+        nums.append(i)
+    nums.reverse()
+
+@total_time
+def list_time2():
+    count = 10**6
+    nums = []
+    for i in range(count):
+        nums.insert(0,i)
+
+if __name__ == '__main__':
+    list_time()
+    # list_time2()  时间太长
+
 
 
 
