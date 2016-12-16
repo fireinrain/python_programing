@@ -1654,12 +1654,12 @@ def list_time():
         nums.append(i)
     nums.reverse()
 
-@total_time
-def list_time2():
-    count = 10**6
-    nums = []
-    for i in range(count):
-        nums.insert(0,i)
+# @total_time
+# def list_time2():
+#     count = 10**6
+#     nums = []
+#     for i in range(count):
+#         nums.insert(0,i)
 
 if __name__ == '__main__':
     list_time()
