@@ -1702,8 +1702,216 @@
 #         my_thread.start()
 
 
+# import threading
+# import time
+#
+# def total_time(func):
+#     def time_it():
+#         start_time = time.time()
+#         func()
+#         end_time = time.time()
+#         print('耗时{}'.format(end_time-start_time))
+#     return time_it
+#
+#
+# # class Mythread(threading.Thread):
+# #     def run(self):
+# #         for i in range(3):
+# #             print('wozai')
+# #             time.sleep(2)
+# #             msg = 'i am'+self.name+'@'+str(i)
+# #             print(msg)
+#
+# class Mythread(threading.Thread):
+#     def run(self):
+#         global num
+#         # time.sleep(1)
+#         num += 1
+#         msg = self.name + 'set num to' + str(num)
+#         print(msg)
+# num = 0
+#
+# @total_time
+# def test():
+#
+#     for _ in range(10000):
+#         t = Mythread()
+#         t.start()
+#
+# if __name__ == '__main__':
+#
+#     test()
+#     print('ddddddddddddddddd')
 
+# import threading
+# import time
+#
+# class MyThead(threading.Thread):
+#     def do1(self):
+#         global resA,resB
+#         if mutexA.acquire():
+#             msg = self.name+' got resA'
+#             print(msg)
+#
+#             if mutexB.acquire(1):
+#                 msg = self.name+' got resB'
+#                 print(msg)
+#                 mutexB.release()
+#             mutexA.release()
+#
+#     def do2(self):
+#         global resA, resB
+#         if mutexA.acquire():
+#             msg = self.name + ' got resA'
+#             print(msg)
+#
+#             if mutexB.acquire(1):
+#                 msg = self.name + ' got resB'
+#                 print(msg)
+#                 mutexB.release()
+#             mutexA.release()
+#
+#     def run(self):
+#         self.do1()
+#         self.do2()
+# resA = 0
+# resB = 0
+# mutexA = threading.Lock()
+# mutexB = threading.Lock()
+#
+# def test():
+#     for _ in range(5):
+#         t = MyThead()
+#         t.start()
+#
+# if __name__ == '__main__':
+#     test()
 
+# import threading
+# import time
+#
+# class Producer(threading.Thread):
+#     def run(self):
+#         global count
+#         while True:
+#             if con.acquire():
+#                 if count > 1000:
+#                     con.wait()
+#                 else:
+#                     count = count+100
+#                     msg = self.name+' produce 100, count=' + str(count)
+#                     print(msg)
+#                     con.notify()
+#                 con.release()
+#                 time.sleep(1)
+#
+# class Consumer(threading.Thread):
+#     def run(self):
+#         global count
+#         while True:
+#             if con.acquire():
+#                 if count < 100:
+#                     con.wait()
+#                 else:
+#                     count = count-3
+#                     msg = self.name+' consume 3, count='+str(count)
+#                     print(msg)
+#                     con.notify()
+#                 con.release()
+#                 time.sleep(1)
+#
+# count = 500
+# con = threading.Condition()
+#
+# def test():
+#     for i in range(2):
+#         p = Producer()
+#         p.start()
+#     for i in range(5):
+#         c = Consumer()
+#         c.start()
+# if __name__ == '__main__':
+#     test()
 
+# import threading
+# import time
+#
+# from queue import Queue
+#
+# class Producer(threading.Thread):
+#     def run(self):
+#         global queues
+#         count = 0
+#         while True:
+#             for i in range(100):
+#                 if queues.qsize() > 1000:
+#                      pass
+#                 else:
+#                      count = count +1
+#                      msg = '生成产品'+str(count)
+#                      queues.put(msg)
+#                      print(msg)
+#             time.sleep(1)
+#
+# class Consumer(threading.Thread):
+#     def run(self):
+#         global queues
+#         while True:
+#             for i in range(3):
+#                 if queues.qsize() < 100:
+#                     pass
+#                 else:
+#                     msg = self.name + '消费了 '+queues.get()
+#                     print(msg)
+#             time.sleep(1)
+#
+# queues = Queue()
+#
+#
+# def test():
+#     for i in range(500):
+#         queues.put('初始产品'+str(i))
+#     for i in range(2):
+#         p = Producer()
+#         p.start()
+#     for i in range(5):
+#         c = Consumer()
+#         c.start()
+# if __name__ == '__main__':
+#     test()
 
+import threading
+import random
+import time
 
+def total_time(func):
+    def time_it():
+        start_time = time.time()
+        func()
+        end_time = time.time()
+        print('耗时{}'.format(end_time-start_time))
+    return time_it
+
+class MyThread(threading.Thread):
+
+    def run(self):
+        # wait_time=random.randrange(1,10)
+        wait_time = 2
+        print("%s will wait %d seconds" % (self.name, wait_time))
+        time.sleep(wait_time)
+        print( "%s finished!" % self.name)
+
+@total_time
+def main():
+    threads = []
+    for i in range(5):
+        t = MyThread()
+        t.start()
+        threads.append(t)
+    print('main thread is waitting for exit...')
+    for t in threads:
+        t.join(1)
+
+    print('main thread finished!')
+if __name__=="__main__":
+    main()
