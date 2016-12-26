@@ -1636,34 +1636,71 @@
 #
 # args = parser.parse_args()
 # print(args.accumulate(args.integers))
-import time
-
-def total_time(func):
-    def time_it():
-        start_time = time.time()
-        func()
-        end_time = time.time()
-        print('耗时{}'.format(end_time-start_time))
-    return time_it
-
-@total_time
-def list_time():
-    count = 10**6
-    nums = []
-    for i in range(count):
-        nums.append(i)
-    nums.reverse()
-
-@total_time
-def list_time2():
-    count = 10**6
-    nums = []
-    for i in range(count):
-        nums.insert(0,i)
-
-if __name__ == '__main__':
-    list_time()
+# import time
+#
+# def total_time(func):
+#     def time_it():
+#         start_time = time.time()
+#         func()
+#         end_time = time.time()
+#         print('耗时{}'.format(end_time-start_time))
+#     return time_it
+#
+# @total_time
+# def list_time():
+#     count = 10**6
+#     nums = []
+#     for i in range(count):
+#         nums.append(i)
+#     nums.reverse()
+#
+# @total_time
+# def list_time2():
+#     count = 10**6
+#     nums = []
+#     for i in range(count):
+#         nums.insert(0,i)
+#
+# if __name__ == '__main__':
+#     list_time()
     # list_time2()  时间太长
+
+# import sys
+# import pdb
+#
+# def add(num1=0,num2=0):
+#     return int(num1)+int(num2)
+#
+# def sub(num1=0,num2=0):
+#     return int(num1)-int(num2)
+#
+# def main():
+#     print(sys.argv)
+#     pdb.set_trace()
+#     addition = add(sys.argv[1],sys.argv[2])
+#     print(addition)
+#     subtraction = sub(sys.argv[1],sys.argv[2])
+#     print(subtraction)
+#
+# if __name__ == '__main__':
+#     main()
+
+# import threading
+#
+# def double(number):
+#     """
+#     可以被线程使用的一个函数
+#     :param number:
+#     :return:
+#     """
+#     print(threading.current_thread().getName()+'\n')
+#     print(number*2,end='\n')
+#
+# if __name__ == '__main__':
+#     for i in range(5):
+#         my_thread = threading.Thread(target=double,args=(i,))
+#         my_thread.start()
+
 
 
 
