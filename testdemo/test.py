@@ -1879,39 +1879,51 @@
 #         c.start()
 # if __name__ == '__main__':
 #     test()
-
-import threading
-import random
-import time
-
-def total_time(func):
-    def time_it():
-        start_time = time.time()
-        func()
-        end_time = time.time()
-        print('耗时{}'.format(end_time-start_time))
-    return time_it
-
-class MyThread(threading.Thread):
-
-    def run(self):
-        # wait_time=random.randrange(1,10)
-        wait_time = 2
-        print("%s will wait %d seconds" % (self.name, wait_time))
-        time.sleep(wait_time)
-        print( "%s finished!" % self.name)
-
-@total_time
-def main():
-    threads = []
-    for i in range(5):
-        t = MyThread()
-        t.start()
-        threads.append(t)
-    print('main thread is waitting for exit...')
-    for t in threads:
-        t.join(1)
-
-    print('main thread finished!')
-if __name__=="__main__":
-    main()
+#
+# import threading
+# import random
+# import time
+#
+# def total_time(func):
+#     def time_it():
+#         start_time = time.time()
+#         func()
+#         end_time = time.time()
+#         print('耗时{}'.format(end_time-start_time))
+#     return time_it
+#
+# class MyThread(threading.Thread):
+#
+#     def run(self):
+#         # wait_time=random.randrange(1,10)
+#         wait_time = 2
+#         print("%s will wait %d seconds" % (self.name, wait_time))
+#         time.sleep(wait_time)
+#         print( "%s finished!" % self.name)
+#
+# @total_time
+# def main():
+#     threads = []
+#     for i in range(5):
+#         t = MyThread()
+#         t.start()
+#         threads.append(t)
+#     print('main thread is waitting for exit...')
+#     for t in threads:
+#         t.join(1)
+#
+#     print('main thread finished!')
+# if __name__=="__main__":
+#     main()
+import _thread
+def task(tName,n):
+    for i in range(n):
+        print("%s:%d\n" % (tName,i))
+        print("%s:任务完成!回真身去喽...\n" % tName )
+        _thread.interrupt_main()
+print("<老孙>:我是孙悟空!")
+print("<老孙>:我拔根毫毛变个小猴儿~~~")
+_thread.start_new_thread(task,("<小猴>",3))
+print("<老孙>:我睡会儿,小猴儿干完活再叫醒我~~~\n" )
+while True:
+    print("<老孙>:Zzzzzzz\n")
