@@ -92,6 +92,8 @@
 #容器对象的引用可能构成很复杂的拓扑结构。
 # 我们可以用objgraph包来绘制其引用关系
 # window下不可用
+# 使用安装graphviz时安装的gvedit.exe就能正确显示了
+
 # import objgraph
 #
 # x = [1,2,3]
