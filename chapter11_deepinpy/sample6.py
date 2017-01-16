@@ -91,11 +91,14 @@
 
 #容器对象的引用可能构成很复杂的拓扑结构。
 # 我们可以用objgraph包来绘制其引用关系
+# window下不可用
 # import objgraph
+#
 # x = [1,2,3]
 # y = [x,dict(key1=x)]
 # z = [y,(x,y)]
 # objgraph.show_refs([z],filename="ref_topo.png")
+
 
 
 # 两个对象可能相互引用，从而构成所谓的引用环(reference cycle)。
