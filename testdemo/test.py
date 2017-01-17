@@ -1915,15 +1915,81 @@
 #     print('main thread finished!')
 # if __name__=="__main__":
 #     main()
-import _thread
-def task(tName,n):
-    for i in range(n):
-        print("%s:%d\n" % (tName,i))
-        print("%s:任务完成!回真身去喽...\n" % tName )
-        _thread.interrupt_main()
-print("<老孙>:我是孙悟空!")
-print("<老孙>:我拔根毫毛变个小猴儿~~~")
-_thread.start_new_thread(task,("<小猴>",3))
-print("<老孙>:我睡会儿,小猴儿干完活再叫醒我~~~\n" )
-while True:
-    print("<老孙>:Zzzzzzz\n")
+# import _thread
+# def task(tName,n):
+#     for i in range(n):
+#         print("%s:%d\n" % (tName,i))
+#         print("%s:任务完成!回真身去喽...\n" % tName )
+#         _thread.interrupt_main()
+# print("<老孙>:我是孙悟空!")
+# print("<老孙>:我拔根毫毛变个小猴儿~~~")
+# _thread.start_new_thread(task,("<小猴>",3))
+# print("<老孙>:我睡会儿,小猴儿干完活再叫醒我~~~\n" )
+# while True:
+#     print("<老孙>:Zzzzzzz\n")
+
+
+
+# import sys
+#
+#
+# def formatlogline(line):
+#     split_line = line.split()
+#     return {'remote_host': split_line[0],
+#             'status': split_line[8],
+#             'bytes_sent': split_line[9],
+#             }
+#
+#
+# def generate_log_report(logfile):
+#     report_dict = {}
+#     for line in logfile:
+#         line_dict = formatlogline(line)
+#         # print line_dict
+#         try:
+#             bytes_send = int(line_dict['bytes_sent'])
+#         except ValueError:
+#             continue
+#         report_dict.setdefault(line_dict['remote_host'], []).append(bytes_send)
+#     return report_dict
+#
+#
+# if __name__ == '__main__':
+#     if not len(sys.argv) > 1:
+#         print
+#         __doc__
+#         sys.exit(1)
+#     infile_name = sys.argv[1]
+#     try:
+#         infile = open(infile_name, 'r')
+#     except IOError:
+#         print
+#         "infile_name not found!"
+#         print
+#         __doc__
+#         sys.exit(1)
+#     else:
+#         log_report = generate_log_report(infile)
+#         # print log_report
+#         for k in log_report:
+#             print
+#             "IP: %s => byte_total: %s" % (k, sum(log_report[k]))
+#         infile.close()
+# 这个程序在LOG抓取时有个小BUG，处理后的数据有
+# {'status': '304', 'bytes_sent': '-', 'remote_host': '192.168.1.1'}
+# bytes_sent为
+# '-'
+# 这个会造成后续的处理错误。
+# 解决办法修改函数formatlogline
+#
+#
+# def formatlogline(line):
+#     split_line = line.split()
+#     dict_line = {'remote_host': split_line[0],
+#                  'status': split_line[8],
+#                  'bytes_sent': split_line[9],
+#                  }
+#     if dict_line['bytes_sent'] == '-':
+#         dict_line['bytes_sent'] = '0'
+#         # return dict_line
+#     return dict_line
