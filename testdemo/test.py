@@ -1993,3 +1993,14 @@
 #         dict_line['bytes_sent'] = '0'
 #         # return dict_line
 #     return dict_line
+
+from datetime import datetime
+import hashlib
+import hmac
+
+key = 'you-never-know'.encode()
+msg = datetime.utcnow().strftime('%Y-%m-%d').encode()
+
+m = hmac.new(key, msg, hashlib.sha1)
+signature = m.hexdigest()
+print(signature)
