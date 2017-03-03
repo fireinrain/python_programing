@@ -2010,3 +2010,30 @@
 # Obj = Object()
 # Obj.name = "whatever"
 # Obj.name
+# class May:
+#     age = 12
+#     class Aug:
+#         aug = 10
+# may = May()
+# print(type(may.Aug))
+
+# import io.BytesIO
+# a = b"hehheheh"
+# io.BytesIO(a).
+import difflib
+str1 = "dasdsadasdjjjjjsdadooa dsa   s" \
+       " 3483483  sd asd as d sa " \
+       "pspdpasppdpps"
+str2 = "suueorokdf,vofsdfsod dfsdf" \
+       "dfsksdkfksdkfksd" \
+       "fdskkfksdkfksdkfkdskf"
+str1 = str1.splitlines()
+str2 = str2.splitlines()
+
+# diff = difflib.Differ()
+# dif = diff.compare(str1,str2)
+# print("\n".join(dif))
+
+diff = difflib.unified_diff(str1,str2)
+print("\n".join(diff))
+diff = difflib.SequenceMatcher
