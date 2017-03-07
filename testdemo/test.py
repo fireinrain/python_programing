@@ -2020,20 +2020,26 @@
 # import io.BytesIO
 # a = b"hehheheh"
 # io.BytesIO(a).
-import difflib
-str1 = "dasdsadasdjjjjjsdadooa dsa   s" \
-       " 3483483  sd asd as d sa " \
-       "pspdpasppdpps"
-str2 = "suueorokdf,vofsdfsod dfsdf" \
-       "dfsksdkfksdkfksd" \
-       "fdskkfksdkfksdkfkdskf"
-str1 = str1.splitlines()
-str2 = str2.splitlines()
+# import difflib
+# str1 = "dasdsadasdjjjjjsdadooa dsa   s" \
+#        " 3483483  sd asd as d sa " \
+#        "pspdpasppdpps"
+# str2 = "suueorokdf,vofsdfsod dfsdf" \
+#        "dfsksdkfksdkfksd" \
+#        "fdskkfksdkfksdkfkdskf"
+# str1 = str1.splitlines()
+# str2 = str2.splitlines()
+#
+# # diff = difflib.Differ()
+# # dif = diff.compare(str1,str2)
+# # print("\n".join(dif))
+#
+# diff = difflib.unified_diff(str1,str2)
+# print("\n".join(diff))
+# diff = difflib.SequenceMatcher
+# open()
 
-# diff = difflib.Differ()
-# dif = diff.compare(str1,str2)
-# print("\n".join(dif))
-
-diff = difflib.unified_diff(str1,str2)
-print("\n".join(diff))
-diff = difflib.SequenceMatcher
+strs = u"\u4f9d"
+a = "小"
+print(strs)
+print(a.encode(encoding="utf-8"))
