@@ -453,3 +453,7 @@ from bs4 import BeautifulSoup
 #     os.makedirs(PWD)
 #
 # requestUrl(urlNext + str(page_count))
+b = [1,2,3]
+a = ["dsd","小倩","dsadss","liuxhao"]
+a.extend(b)
+print(a)

@@ -3,6 +3,10 @@
 # Written by liuzhaoyang
 # wcontact:liu575563079@gmail.com
 
+# 该方法来渲染字符串模板问题在于
+# 模板字符串参与python代码逻辑
+# 往后的扩展必然会遇到很多麻烦
+
 
 # 页面主体html字符串
 PAGE_HTML = """
