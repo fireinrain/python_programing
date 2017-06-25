@@ -226,7 +226,6 @@
 # print(headers)
 # print(a)
 
-import re
 # s=' 長谷川るいの、いっぱABP-314いコスって萌えてイこう！.avi'
 # patt=re.compile('\w{3,4}-\d{3}')
 # b=re.search(patt,s).group()
@@ -248,8 +247,6 @@ import re
 
 
 
-import requests
-from bs4 import BeautifulSoup
 # import http.cookiejar
 # headers={
 # "authority":"www.javbus2.com",
@@ -453,7 +450,66 @@ from bs4 import BeautifulSoup
 #     os.makedirs(PWD)
 #
 # requestUrl(urlNext + str(page_count))
-b = [1,2,3]
-a = ["dsd","小倩","dsadss","liuxhao"]
-a.extend(b)
-print(a)
+# b = [1,2,3]
+# a = ["dsd","小倩","dsadss","liuxhao"]
+# a.extend(b)
+# print(a)
+
+# import types
+# class Myint(int):
+#     pass
+# myint = Myint()
+# print(type(myint) is types.)
+# i = 1
+# while(i!=1.5):
+#     i+=0.1
+#     print(i)
+
+# eval("a=1;b=2;c=a+b",globals={})
+# print(globals)
+
+# try:
+#     pass
+# except:
+#     pass
+# finally:
+#     pass
+# import timeit
+#
+#
+# def strs():
+#     a = ""
+#     for i in range(1000):
+#         a+="abc"
+#     return a
+#
+# # print(strs())
+#
+#
+# t = timeit.Timer("strs()")
+# print(t.timeit())
+
+# import requests as rq
+#
+# url = requests.get("https://www.google.com").content
+# print(url.decode("utf-8"))
+
+# import asyncio
+# import requests
+# import pprint
+#
+# loop = asyncio.get_event_loop()
+#
+# async def sayHello():
+#     print("hello")
+#     await asyncio.sleep(5)
+#     print("fuck")
+#
+# if __name__ == "__main__":
+#     # loop.run_until_complete(sayHello())
+#     url = requests.get("https://www.google.com").text
+#
+#     pprint.pprint(url)
+
+
+from selenium import webdriver
